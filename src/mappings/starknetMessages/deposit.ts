@@ -19,9 +19,9 @@ import {
 import { makeIdFromPayload } from "../../utils/makeIdFromPayload";
 
 export function handleLogMessageToL2(event: LogMessageToL2): void {
-  let bridgeL1Address = event.params.from_address;
+  let bridgeL1Address = event.params.fromAddress;
   let bridgeL2Address = bigIntToAddressBytes(
-    event.params.to_address,
+    event.params.toAddress,
     ADDRESS_TYPE.STARKNET
   );
   log.error("got here", [])
@@ -45,9 +45,9 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
 }
 
 export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
-  let bridgeL1Address = event.params.from_address;
+  let bridgeL1Address = event.params.fromAddress;
   let bridgeL2Address = bigIntToAddressBytes(
-    event.params.to_address,
+    event.params.toAddress,
     ADDRESS_TYPE.STARKNET
   );
 

@@ -19,9 +19,9 @@ export function createDepositEvent(event: LogMessageToL2): DepositEvent {
     l2Recipient,
     ADDRESS_TYPE.STARKNET
   );
-  depositEvent.bridgeAddressL1 = event.params.from_address;
+  depositEvent.bridgeAddressL1 = event.params.fromAddress;
   depositEvent.bridgeAddressL2 = bigIntToAddressBytes(
-    event.params.to_address,
+    event.params.toAddress,
     ADDRESS_TYPE.STARKNET
   );
   depositEvent.amount = convertUint256ToBigInt(amountLow, amountHigh);

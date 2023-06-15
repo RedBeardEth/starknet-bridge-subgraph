@@ -19,9 +19,9 @@ export function createWithdrawalEvent(event: LogMessageToL1): WithdrawalEvent {
     l1Recipient,
     ADDRESS_TYPE.ETHEREUM
   );
-  withdrawalEvent.bridgeAddressL1 = event.params.to_address;
+  withdrawalEvent.bridgeAddressL1 = event.params.toAddress;
   withdrawalEvent.bridgeAddressL2 = bigIntToAddressBytes(
-    event.params.from_address,
+    event.params.fromAddress,
     ADDRESS_TYPE.STARKNET
   );
   withdrawalEvent.amount = convertUint256ToBigInt(amountLow, amountHigh);
