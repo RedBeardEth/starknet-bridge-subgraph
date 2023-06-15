@@ -54,7 +54,7 @@ export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
   let unfinishedDeposit = loadOrCreateUnfinishedDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
-  if (unfinishedDeposit.depositEvents[0]) {
+  if (unfinishedDeposit.depositEvents && unfinishedDeposit.depositEvents[0]) {
     let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
     if (depositEvent) {
       depositEvent.status = TransferStatus.FINISHED;
