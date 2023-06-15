@@ -51,17 +51,18 @@ export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
     return;
   }
 
-  let unfinishedDeposit = loadUnfinishedDeposit(
+  let unfinishedDeposit = loadOrCreateUnfinishedDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
 
   let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
+  if(depositEvent){
   depositEvent.status = TransferStatus.FINISHED;
   depositEvent.finishedAtBlock = event.block.number;
   depositEvent.finishedAtDate = event.block.timestamp;
   depositEvent.finishedTxHash = event.transaction.hash;
   depositEvent.save();
-
   unfinishedDeposit.depositEvents = unfinishedDeposit.depositEvents.slice(1);
+  }
   unfinishedDeposit.save();
 }
