@@ -24,9 +24,9 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
     event.params.to_address,
     ADDRESS_TYPE.STARKNET
   );
-
-  log.warning("l1bridge {}", [bridgeL1Address.toString()])
-  log.warning("l2bridge {}", [bridgeL2Address.toString()])
+  log.error("got here", [])
+  log.error("l1bridge {}", [bridgeL1Address.toString()])
+  log.error("l2bridge {}", [bridgeL2Address.toString()])
 
   if (!isBridgeDepositMessage(bridgeL1Address, bridgeL2Address)) {
     return;
