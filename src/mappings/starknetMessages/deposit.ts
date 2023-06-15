@@ -24,9 +24,6 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
     event.params.toAddress,
     ADDRESS_TYPE.STARKNET
   );
-  log.error("got here", [])
-  log.error("l1bridge {}", [bridgeL1Address.toString()])
-  log.error("l2bridge {}", [bridgeL2Address.toString()])
 
   if (!isBridgeDepositMessage(bridgeL1Address, bridgeL2Address)) {
     return;
@@ -59,16 +56,13 @@ export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
 
-  if (unfinishedDeposit.depositEvents && unfinishedDeposit.depositEvents[0]) {
-    let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
-    if (depositEvent) {
-      depositEvent.status = TransferStatus.FINISHED;
-      depositEvent.finishedAtBlock = event.block.number;
-      depositEvent.finishedAtDate = event.block.timestamp;
-      depositEvent.finishedTxHash = event.transaction.hash;
-      depositEvent.save();
-      unfinishedDeposit.depositEvents = unfinishedDeposit.depositEvents.slice(1);
-    }
-  }
+  let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
+  depositEvent.status = TransferStatus.FINISHED;
+  depositEvent.finishedAtBlock = event.block.number;
+  depositEvent.finishedAtDate = event.block.timestamp;
+  depositEvent.finishedTxHash = event.transaction.hash;
+  depositEvent.save();
+  
+  unfinishedDeposit.depositEvents = unfinishedDeposit.depositEvents.slice(1);
   unfinishedDeposit.save();
 }

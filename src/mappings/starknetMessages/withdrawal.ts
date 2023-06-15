@@ -1,3 +1,4 @@
+import { log } from "@graphprotocol/graph-ts";
 import {
   ConsumedMessageToL1,
   LogMessageToL1,
@@ -24,6 +25,9 @@ export function handleLogMessageToL1(event: LogMessageToL1): void {
     ADDRESS_TYPE.STARKNET
   );
 
+  log.debug("handle l1 log bridgeL1Address",[bridgeL1Address.toHexString()])
+  log.debug("bridgeL1Address",[bridgeL2Address.toHexString()])
+
   if (!isBridgeWithdrawalMessage(bridgeL2Address, bridgeL1Address)) {
     return;
   }
@@ -33,6 +37,8 @@ export function handleLogMessageToL1(event: LogMessageToL1): void {
   const unfinishedWithdrawal = loadOrCreateUnfinishedWithdrawal(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
+  log.debug("unfin withdrawal",[unfinishedWithdrawal.id])
+
   unfinishedWithdrawal.withdrawalEvents = addUniq(
     unfinishedWithdrawal.withdrawalEvents,
     withdrawalEvent.id
