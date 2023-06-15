@@ -1,6 +1,6 @@
 {
   "subgraphName": "redbeardeth/starknet-bridge-goerli",
-  "startBlock": 6221339,
+  "startBlock": 9137060,
   "network": "goerli",
   "modules": {
     "starknetMessaging": "0xde29d060D45901Fb19ED6C6e959EB22d8626708e",
@@ -9,7 +9,7 @@
     "tokenBridges": [{
         "token": "0x7543919933eef56f754daf6835fa97f6dfd785d8",
         "bridgeL1": "0x85eDe5E162A94ACabFF6dE15CCc4341C6442B441",
-        "bridgeL2": "0x7bd1560465935885b3e8930f51194fa9289b2ff35daf4b553672f1aa5993296"
+        "bridgeL2": "0x07bd1560465935885b3e8930f51194fa9289b2ff35daf4b553672f1aa5993296"
       }
     ]
   }
