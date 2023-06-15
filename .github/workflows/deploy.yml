@@ -30,9 +30,3 @@ jobs:
 
       - name: Build and deploy ${{ matrix.type }}
         run: yarn deploy
-
-        Subgraph instance failed to run: transaction b5fbfef8cc7420270b3035afd10e6c7594fef345d9c59e0507eeaba96ddc5bc4: Mapping aborted at ~lib/array.ts, line 114, column 42, with message: Index out of range wasm backtrace: 0: 0x2838 - <unknown>!~lib/array/Array<~lib/@graphprotocol/graph-ts/chain/ethereum/ethereum.EventParam>#__get 1: 0x4457 - <unknown>!src/mappings/starknetMessages/deposit/handleConsumedMessageToL2 in handler `handleConsumedMessageToL2` at block #9141378 (69467c8661804bfd308fdc3b1823f242e992b10af29dcfdf278f95d59ad08da0), code: SubgraphSyncingFailure
-
-        Subgraph error 1/1, code: SubgraphSyncingFailure, error: transaction b5fbfef8cc7420270b3035afd10e6c7594fef345d9c59e0507eeaba96ddc5bc4: Mapping aborted at ~lib/array.ts, line 114, column 42, with message: Index out of range wasm backtrace: 0: 0x2838 - <unknown>!~lib/array/Array<~lib/@graphprotocol/graph-ts/chain/ethereum/ethereum.EventParam>#__get 1: 0x4457 - <unknown>!src/mappings/starknetMessages/deposit/handleConsumedMessageToL2 in handler `handleConsumedMessageToL2` at block #9141378 (69467c8661804bfd308fdc3b1823f242e992b10af29dcfdf278f95d59ad08da0), block_hash: 0x69467c8661804bfd308fdc3b1823f242e992b10af29dcfdf278f95d59ad08da0, block_number: 9141378
-
-        Handler skipped due to execution failure, transaction: 0xb5fb…5bc4, address: 0xde29…708e, signature: ConsumedMessageToL2(indexed address,indexed uint256,indexed uint256,uint256[],uint256), error: transaction b5fbfef8cc7420270b3035afd10e6c7594fef345d9c59e0507eeaba96ddc5bc4: Mapping aborted at ~lib/array.ts, line 114, column 42, with message: Index out of range wasm backtrace: 0: 0x2838 - <unknown>!~lib/array/Array<~lib/@graphprotocol/graph-ts/chain/ethereum/ethereum.EventParam>#__get 1: 0x4457 - <unknown>!src/mappings/starknetMessages/deposit/handleConsumedMessageToL2 , handler: handleConsumedMessageToL2
