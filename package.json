@@ -3,7 +3,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build:stable": "TYPE=stable yarn build",
-    "build:staging": "TYPE=staging yarn build",
+    "build:goerli": "TYPE=goerli yarn build",
     "build": "yarn pre-build && graph build",
     "deploy": "yarn pre-build && yarn graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ ${SUBGRAPH_NAME} --access-token ${THEGRAPH_ACCESS_TOKEN}",
     "pre-build": "yarn prepare-manifest && yarn codegen",
