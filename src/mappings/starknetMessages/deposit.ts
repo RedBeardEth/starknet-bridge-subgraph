@@ -1,3 +1,4 @@
+import { log } from "@graphprotocol/graph-ts";
 import {
   ConsumedMessageToL2,
   LogMessageToL2,
@@ -23,6 +24,9 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
     event.params.to_address,
     ADDRESS_TYPE.STARKNET
   );
+
+  log.debug("l1bridge {}", [bridgeL1Address.toString()])
+  log.debug("l2bridge {}", [bridgeL2Address.toString()])
 
   if (!isBridgeDepositMessage(bridgeL1Address, bridgeL2Address)) {
     return;
@@ -51,9 +55,10 @@ export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
     return;
   }
 
-  let unfinishedDeposit = loadOrCreateUnfinishedDeposit(
+  let unfinishedDeposit = loadUnfinishedDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
+
   if (unfinishedDeposit.depositEvents && unfinishedDeposit.depositEvents[0]) {
     let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
     if (depositEvent) {
