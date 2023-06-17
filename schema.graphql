@@ -17,10 +17,12 @@ type DepositEvent @entity {
   finishedTxHash: Bytes
 }
 
-type UnfinishedDeposit @entity {
+type Deposit @entity {
   "[bridgeL1Address, ...payload].join('-')"
   id: ID!
   depositEvents: [DepositEvent!]!
+  fromAddress: Bytes!
+  l2Recipient: Bytes!
 }
 
 ##################
@@ -45,6 +47,8 @@ type WithdrawalEvent @entity {
 type UnfinishedWithdrawal @entity {
   "[bridgeL1Address, ...payload].join('-')"
   id: ID!
+  fromAddress: Bytes!
+  l1Recipient: Bytes!
   withdrawalEvents: [WithdrawalEvent!]!
 }
 

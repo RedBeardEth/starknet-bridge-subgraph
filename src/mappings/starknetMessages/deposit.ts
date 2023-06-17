@@ -6,8 +6,8 @@ import {
 import {
   createDepositEvent,
   loadDepositEvent,
-  loadOrCreateUnfinishedDeposit,
-  loadUnfinishedDeposit,
+  loadOrCreateDeposit,
+  loadDeposit,
 } from "../../entities";
 import {
   ADDRESS_TYPE,
@@ -31,14 +31,14 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
 
   const depositEvent = createDepositEvent(event);
 
-  const unfinishedDeposit = loadOrCreateUnfinishedDeposit(
+  const deposit = loadOrCreateDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
-  unfinishedDeposit.depositEvents = addUniq(
-    unfinishedDeposit.depositEvents,
+  deposit.depositEvents = addUniq(
+    deposit.depositEvents,
     depositEvent.id
   );
-  unfinishedDeposit.save();
+  deposit.save();
 }
 
 export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
@@ -52,17 +52,14 @@ export function handleConsumedMessageToL2(event: ConsumedMessageToL2): void {
     return;
   }
 
-  let unfinishedDeposit = loadUnfinishedDeposit(
+  let deposit = loadDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
 
-  let depositEvent = loadDepositEvent(unfinishedDeposit.depositEvents[0]);
+  let depositEvent = loadDepositEvent(deposit.depositEvents[0]);
   depositEvent.status = TransferStatus.FINISHED;
   depositEvent.finishedAtBlock = event.block.number;
   depositEvent.finishedAtDate = event.block.timestamp;
   depositEvent.finishedTxHash = event.transaction.hash;
   depositEvent.save();
-  
-  unfinishedDeposit.depositEvents = unfinishedDeposit.depositEvents.slice(1);
-  unfinishedDeposit.save();
-}
+  }
