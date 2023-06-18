@@ -1,4 +1,4 @@
-import { log } from "@graphprotocol/graph-ts";
+import { log, ethereum } from "@graphprotocol/graph-ts";
 import {
   ConsumedMessageToL2,
   LogMessageToL2,
@@ -14,6 +14,8 @@ import {
   addUniq,
   bigIntToAddressBytes,
   isBridgeDepositMessage,
+  L1BRIDGE_DEPOSIT_SIG,
+  l1BridgesAddresses,
   TransferStatus,
 } from "../../utils";
 import { makeIdFromPayload } from "../../utils/makeIdFromPayload";
@@ -34,6 +36,14 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
   const deposit = loadOrCreateDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
+
+  let receipt = event.receipt
+  if (receipt) {
+    const depositLog = receipt.logs.findIndex((log) =>{ return log.address == l1BridgesAddresses[0] && log.topics[0].toHexString() == L1BRIDGE_DEPOSIT_SIG})
+     deposit.l1Sender = ethereum.decode('address', receipt.logs[depositLog].topics[1])!.toAddress();
+  }
+
+  deposit.createdTxHash = event.transaction.hash
   deposit.depositEvents = addUniq(
     deposit.depositEvents,
     depositEvent.id

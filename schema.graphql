@@ -21,8 +21,8 @@ type Deposit @entity {
   "[bridgeL1Address, ...payload].join('-')"
   id: ID!
   depositEvents: [DepositEvent!]!
-  fromAddress: Bytes!
-  l2Recipient: Bytes!
+  createdTxHash: Bytes!
+  l1Sender: Bytes!
 }
 
 ##################
