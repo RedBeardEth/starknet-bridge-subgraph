@@ -18,18 +18,12 @@ import {
 import { makeIdFromPayload } from "../../utils/makeIdFromPayload";
 
 export function handleLogDeposit(event: LogDeposit): void {
-  let bridgeL1Address = event.params.fromAddress;
-  let bridgeL2Address = bigIntToAddressBytes(
+  let bridgeL1Address = event.params.;
+  /*let bridgeL2Address = bigIntToAddressBytes(
     event.params.toAddress,
     ADDRESS_TYPE.STARKNET
   );
-
-  if (!isBridgeDepositMessage(bridgeL1Address, bridgeL2Address)) {
-    return;
-  }
-
-  const depositEvent = createDepositEvent(event);
-
+*/
   const deposit = loadOrCreateDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
