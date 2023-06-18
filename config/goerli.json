@@ -1,6 +1,6 @@
 {
   "subgraphName": "redbeardeth/starknet-bridge-goerli",
-  "startBlock": 9137060,
+  "startBlock": 9182400,
   "network": "goerli",
   "modules": {
     "starknetMessaging": "0xde29d060D45901Fb19ED6C6e959EB22d8626708e",
