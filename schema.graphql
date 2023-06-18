@@ -47,8 +47,8 @@ type WithdrawalEvent @entity {
 type UnfinishedWithdrawal @entity {
   "[bridgeL1Address, ...payload].join('-')"
   id: ID!
-  fromAddress: Bytes!
-  l1Recipient: Bytes!
+  #fromAddress: Bytes!
+  #l1Recipient: Bytes!
   withdrawalEvents: [WithdrawalEvent!]!
 }
 
