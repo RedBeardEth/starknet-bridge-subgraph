@@ -70,9 +70,5 @@ export function handleConsumedMessageToL1(event: ConsumedMessageToL1): void {
   withdrawalEvent.finishedAtDate = event.block.timestamp;
   withdrawalEvent.finishedTxHash = event.transaction.hash;
   withdrawalEvent.save();
-
-  withdrawal.withdrawalEvents = withdrawal.withdrawalEvents.slice(
-    1
-  );
   withdrawal.save();
 }
