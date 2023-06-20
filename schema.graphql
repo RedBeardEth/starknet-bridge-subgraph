@@ -44,11 +44,12 @@ type WithdrawalEvent @entity {
   finishedTxHash: Bytes
 }
 
-type UnfinishedWithdrawal @entity {
+type Withdrawal @entity {
   "[bridgeL1Address, ...payload].join('-')"
   id: ID!
   #fromAddress: Bytes!
   #l1Recipient: Bytes!
+  l2Sender: Bytes!
   withdrawalEvents: [WithdrawalEvent!]!
 }
 

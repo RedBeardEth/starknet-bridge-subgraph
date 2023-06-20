@@ -1,12 +1,12 @@
-import { log } from "@graphprotocol/graph-ts";
+import { Address, log } from "@graphprotocol/graph-ts";
 import {
   ConsumedMessageToL1,
   LogMessageToL1,
 } from "../../../generated/StarknetMessaging/StarknetMessaging";
 import {
   createWithdrawalEvent,
-  loadOrCreateUnfinishedWithdrawal,
-  loadUnfinishedWithdrawal,
+  loadOrCreateWithdrawal,
+  loadWithdrawal,
   loadWithdrawalEvent,
 } from "../../entities";
 import {
@@ -31,15 +31,16 @@ export function handleLogMessageToL1(event: LogMessageToL1): void {
 
   const withdrawalEvent = createWithdrawalEvent(event);
 
-  const unfinishedWithdrawal = loadOrCreateUnfinishedWithdrawal(
-    makeIdFromPayload(bridgeL1Address, event.params.payload)
+  const withdrawal = loadOrCreateWithdrawal(
+    makeIdFromPayload(bridgeL1Address, event.params.payload),
+    new Address(0)
   );
 
-  unfinishedWithdrawal.withdrawalEvents = addUniq(
-    unfinishedWithdrawal.withdrawalEvents,
+  withdrawal.withdrawalEvents = addUniq(
+    withdrawal.withdrawalEvents,
     withdrawalEvent.id
   );
-  unfinishedWithdrawal.save();
+  withdrawal.save();
 }
 
 export function handleConsumedMessageToL1(event: ConsumedMessageToL1): void {
@@ -53,12 +54,12 @@ export function handleConsumedMessageToL1(event: ConsumedMessageToL1): void {
     return;
   }
 
-  let unfinishedWithdrawal = loadUnfinishedWithdrawal(
+  let withdrawal = loadWithdrawal(
     makeIdFromPayload(bridgeL1Address, event.params.payload)
   );
 
   let withdrawalEvent = loadWithdrawalEvent(
-    unfinishedWithdrawal.withdrawalEvents[0]
+    withdrawal.withdrawalEvents[0]
   );
   withdrawalEvent.status = TransferStatus.FINISHED;
   withdrawalEvent.finishedAtBlock = event.block.number;
@@ -66,8 +67,8 @@ export function handleConsumedMessageToL1(event: ConsumedMessageToL1): void {
   withdrawalEvent.finishedTxHash = event.transaction.hash;
   withdrawalEvent.save();
 
-  unfinishedWithdrawal.withdrawalEvents = unfinishedWithdrawal.withdrawalEvents.slice(
+  withdrawal.withdrawalEvents = withdrawal.withdrawalEvents.slice(
     1
   );
-  unfinishedWithdrawal.save();
+  withdrawal.save();
 }
