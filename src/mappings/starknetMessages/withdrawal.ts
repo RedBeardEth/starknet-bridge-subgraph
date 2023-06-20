@@ -33,6 +33,10 @@ export function handleLogMessageToL1(event: LogMessageToL1): void {
 
   const withdrawal = loadOrCreateWithdrawal(
     makeIdFromPayload(bridgeL1Address, event.params.payload),
+    bigIntToAddressBytes(
+      event.params.payload[1],
+      ADDRESS_TYPE.ETHEREUM
+    ),
     new Address(0)
   );
 
