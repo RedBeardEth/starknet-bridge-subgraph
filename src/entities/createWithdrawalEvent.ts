@@ -25,7 +25,7 @@ export function createWithdrawalEvent(event: LogMessageToL1): WithdrawalEvent {
     ADDRESS_TYPE.STARKNET
   );
   withdrawalEvent.amount = convertUint256ToBigInt(amountLow, amountHigh);
-  withdrawalEvent.status = TransferStatus.PENDING;
+  withdrawalEvent.status = TransferStatus.ACCEPTEDONL1;
 
   withdrawalEvent.createdAtBlock = event.block.number;
   withdrawalEvent.createdTxHash = event.transaction.hash;
