@@ -40,7 +40,11 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
   const deposit = loadOrCreateDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload),
     ethereum.decode('address', event.receipt!.logs[depositLog].topics[1])!.toAddress(),
-    event.block.timestamp
+    event.block.timestamp,
+    bigIntToAddressBytes(
+      event.params.payload[0],
+      ADDRESS_TYPE.STARKNET
+    )
   );
 
   deposit.depositEvents = addUniq(

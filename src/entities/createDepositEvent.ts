@@ -11,14 +11,10 @@ import {
 export function createDepositEvent(event: LogMessageToL2): DepositEvent {
   let depositEvent = new DepositEvent(getUniqId(event));
 
-  let l2Recipient = event.params.payload[0];
   let amountLow = event.params.payload[1];
   let amountHigh = event.params.payload[2];
 
-  depositEvent.l2Recipient = bigIntToAddressBytes(
-    l2Recipient,
-    ADDRESS_TYPE.STARKNET
-  );
+
   depositEvent.bridgeAddressL1 = event.params.fromAddress;
   depositEvent.bridgeAddressL2 = bigIntToAddressBytes(
     event.params.toAddress,

@@ -7,7 +7,6 @@ type DepositEvent @entity {
   id: ID!
   bridgeAddressL1: Bytes!
   bridgeAddressL2: Bytes!
-  l2Recipient: Bytes!
   amount: BigInt!
   status: TransferStatus!
   createdAtBlock: BigInt!
@@ -23,6 +22,7 @@ type Deposit @entity {
   depositEvents: [DepositEvent!]!
   #createdTxHash: Bytes!
   l1Sender: Bytes!
+  l2Recipient: Bytes!
   createdTimestamp: BigInt
 }
 
