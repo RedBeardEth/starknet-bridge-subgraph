@@ -13,6 +13,7 @@ type DepositEvent @entity {
   createdAtBlock: BigInt!
   createdTxHash: Bytes!
   finishedAtBlock: BigInt
+  createdTimestamp: BigInt
   finishedAtDate: BigInt
   finishedTxHash: Bytes
 }
