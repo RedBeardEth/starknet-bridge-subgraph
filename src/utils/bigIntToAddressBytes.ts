@@ -19,6 +19,6 @@ export function bigIntToAddressBytes(
       : STARK_ADDRESS_LENGTH;
 
   return Bytes.fromHexString(
-    "0x" + "0".repeat(addressLength - unprefixedHex.length) + unprefixedHex
+    "0x" + unprefixedHex
   ) as Bytes;
 }
