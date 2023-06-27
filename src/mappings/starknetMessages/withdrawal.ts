@@ -66,7 +66,7 @@ export function handleConsumedMessageToL1(event: ConsumedMessageToL1): void {
   let withdrawalEvent = loadWithdrawalEvent(
     withdrawal.withdrawalEvents[0]
   );
-  withdrawalEvent.status = TransferStatus.FINISHED;
+  withdrawalEvent.status = TransferStatus.ACCEPTED_ON_L1;
   withdrawalEvent.finishedAtBlock = event.block.number;
   withdrawalEvent.finishedAtDate = event.block.timestamp;
   withdrawalEvent.finishedTxHash = event.transaction.hash;
