@@ -6,8 +6,8 @@ export let ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export class TransferStatus {
   static PENDING: string = "PENDING";
   static FINISHED: string = "FINISHED";
-  static ACCEPTEDONL1: string = "ACCEPTEDONL1";
-  static ACCEPTEDONL2: string = "ACCEPTEDONL2";
+  static ACCEPTED_ON_L1: string = "ACCEPTED_ON_L1";
+  static ACCEPTED_ON_L2: string = "ACCEPTED_ON_L2";
 }
 
 export const l1BridgesAddresses: Bytes[] = bridgesAddressesL1.map<Bytes>(
