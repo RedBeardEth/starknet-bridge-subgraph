@@ -29,7 +29,6 @@ export function createDepositEvent(event: LogMessageToL2): DepositEvent {
 
   depositEvent.createdAtBlock = event.block.number;
   depositEvent.createdTxHash = event.transaction.hash;
-  depositEvent.createdTimestamp = event.block.timestamp;
 
   depositEvent.finishedAtBlock = null;
   depositEvent.finishedAtDate = null;

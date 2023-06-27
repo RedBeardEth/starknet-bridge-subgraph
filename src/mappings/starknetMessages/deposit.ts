@@ -39,7 +39,8 @@ export function handleLogMessageToL2(event: LogMessageToL2): void {
   log.debug("deposit log topic is {}", [event.receipt!.logs[depositLog].topics[1].toHexString()])
   const deposit = loadOrCreateDeposit(
     makeIdFromPayload(bridgeL1Address, event.params.payload),
-    ethereum.decode('address', event.receipt!.logs[depositLog].topics[1])!.toAddress()
+    ethereum.decode('address', event.receipt!.logs[depositLog].topics[1])!.toAddress(),
+    event.block.timestamp
   );
 
   deposit.depositEvents = addUniq(

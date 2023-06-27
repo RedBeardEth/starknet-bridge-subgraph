@@ -13,7 +13,6 @@ type DepositEvent @entity {
   createdAtBlock: BigInt!
   createdTxHash: Bytes!
   finishedAtBlock: BigInt
-  createdTimestamp: BigInt
   finishedAtDate: BigInt
   finishedTxHash: Bytes
 }
@@ -24,6 +23,7 @@ type Deposit @entity {
   depositEvents: [DepositEvent!]!
   #createdTxHash: Bytes!
   l1Sender: Bytes!
+  createdTimestamp: BigInt
 }
 
 ##################
@@ -38,7 +38,6 @@ type WithdrawalEvent @entity {
   l1Recipient: Bytes!
   amount: BigInt!
   status: TransferStatus!
-  createdTimestamp: BigInt
   createdAtBlock: BigInt!
   createdTxHash: Bytes!
   finishedAtBlock: BigInt
@@ -52,6 +51,7 @@ type Withdrawal @entity {
   #fromAddress: Bytes!
   l1Recipient: Bytes!
   l2Sender: Bytes!
+  createdTimestamp: BigInt
   withdrawalEvents: [WithdrawalEvent!]!
 }
 

@@ -37,7 +37,8 @@ export function handleLogMessageToL1(event: LogMessageToL1): void {
       event.params.payload[1],
       ADDRESS_TYPE.ETHEREUM
     ),
-    new Address(0)
+    new Address(0),
+    event.block.timestamp
   );
 
   withdrawal.withdrawalEvents = addUniq(
