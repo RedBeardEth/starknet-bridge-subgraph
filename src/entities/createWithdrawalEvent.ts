@@ -27,6 +27,7 @@ export function createWithdrawalEvent(event: LogMessageToL1): WithdrawalEvent {
   withdrawalEvent.amount = convertUint256ToBigInt(amountLow, amountHigh);
   withdrawalEvent.status = TransferStatus.PENDING;
 
+  withdrawalEvent.createdTimestamp = event.block.timestamp;
   withdrawalEvent.createdAtBlock = event.block.number;
   withdrawalEvent.createdTxHash = event.transaction.hash;
   withdrawalEvent.finishedAtBlock = null;

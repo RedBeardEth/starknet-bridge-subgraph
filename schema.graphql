@@ -38,6 +38,7 @@ type WithdrawalEvent @entity {
   l1Recipient: Bytes!
   amount: BigInt!
   status: TransferStatus!
+  createdTimestamp: BigInt
   createdAtBlock: BigInt!
   createdTxHash: Bytes!
   finishedAtBlock: BigInt
